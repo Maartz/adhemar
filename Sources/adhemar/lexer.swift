@@ -8,12 +8,13 @@ class Lexer {
     var line = 1
 
     private let keywords: [String: TokenType] = [
+        "let": .LET,
         "and": .AND,
         "class": .CLASS,
         "else": .ELSE,
         "false": .FALSE,
         "for": .FOR,
-        "fun": .FUN,
+        "fn": .FUN,
         "if": .IF,
         "nil": .NIL,
         "or": .OR,
@@ -46,7 +47,7 @@ class Lexer {
         return current >= source.count
     }
 
-    func scanToken() {
+    func scanToken() -> Token? {
         let c = advance()
         switch c {
         case "(": addToken(type: .LEFT_PAREN)
@@ -62,7 +63,7 @@ class Lexer {
         case "!":
             addToken(type: match(expected: "=") ? .BANG_EQUAL : .BANG)
         case "=":
-            addToken(type: match(expected: "=") ? .EQUAL_EQUAL : .EQUAL)
+            addToken(type: match(expected: "=") ? .EQUAL_EQUAL : .ASSIGN)
         case "<":
             addToken(type: match(expected: "=") ? .LESS_EQUAL : .LESS)
         case ">":
@@ -96,6 +97,8 @@ class Lexer {
             }
             break
         }
+    return Token(type: .EOF, lexeme: "", literal: nil, line: line)
+    }
 
         func advance() -> Character {
             current += 1
@@ -214,5 +217,4 @@ class Lexer {
         func report(_ line: Int, _ where: String, _ message: String) {
             print("[line \(line)] Error\(`where`): \(message)")
         }
-    }
 }

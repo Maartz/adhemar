@@ -1,7 +1,5 @@
 import Foundation
 
-import Foundation
-
 @main
 public class Adhemar {
     var hadError: Bool = false
@@ -32,7 +30,7 @@ public class Adhemar {
 
     func runPrompt() {
         while true {
-            print("> ", terminator: "")
+            print("🐒 >> ", terminator: "")
             let line = readLine()
             if line == nil {
                 break
@@ -48,7 +46,7 @@ public class Adhemar {
     
         // For now, we just print the tokens.
         for token in tokens {
-            print("\(token.type): \(token.lexeme)")
+            print(token.description())
         }
     }
 

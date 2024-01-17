@@ -1,4 +1,5 @@
 enum TokenType: Equatable {
+    case LET
     case LEFT_PAREN
     case RIGHT_PAREN
     case LEFT_BRACE
@@ -12,7 +13,7 @@ enum TokenType: Equatable {
     case STAR
     case BANG
     case BANG_EQUAL
-    case EQUAL
+    case ASSIGN
     case EQUAL_EQUAL
     case GREATER
     case GREATER_EQUAL
